@@ -23,7 +23,7 @@
 }
 
 .containerInput {
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 15px;
   margin: 34px 0;
   display: flex;
@@ -61,17 +61,17 @@
 .main {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   background-color: #fff;
   width: 500px;
   border-radius: 8px;
+  padding: 30px;
 }
 
 .main h2 {
-  margin: 16px 0 0;
-  font-size: 39px;
-  line-height: 42px;
+  font-size: 40px;
+  line-height: 60px;
 }
 
 .main span {
@@ -79,9 +79,8 @@
   font-weight: bold;
 }
 
-
 @media (max-width: 768px) {
-  .title{
+  .title {
     font-size: 60px;
   }
 
@@ -91,6 +90,5 @@
 
   .main {
     width: 80%;
-    min-height: 250px;
   }
 }

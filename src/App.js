@@ -5,6 +5,7 @@ import api from "./services/api";
 
 function App() {
   const [cep, setCep] = React.useState("");
+  const [dados, setDados] = React.useState(null);
 
   const handleSearch = async (event) => {
     if (!cep) {
@@ -13,10 +14,16 @@ function App() {
     }
 
     try {
+      setDados(null);
       const response = await api.get(`/${cep}/json`);
-      console.log(response);
+      if (!response.data.erro) {
+        setDados(response.data);
+      } else {
+        throw new Error("Falha na API");
+      }
     } catch (error) {
       alert("Falha ao consultar o CEP");
+      setDados(null);
       throw new Error(error);
     } finally {
       setCep("");
@@ -38,13 +45,15 @@ function App() {
         </button>
       </div>
 
-      <main className="main">
-        <h2>CEP: 79000-784</h2>
-        <span>Rua: Teste</span>
-        <span>Complemento: algum complemento</span>
-        <span>Vila Rosa</span>
-        <span>Manaus - AM</span>
-      </main>
+      {dados && (
+        <main className="main">
+          <h2>CEP: {dados.cep}</h2>
+          <span>Rua: {dados.logradouro}</span>
+          <span>Complemento: {dados.complemento}</span>
+          <span>{dados.bairro}</span>
+          <span>{`${dados.localidade} - ${dados.uf}`}</span>
+        </main>
+      )}
     </div>
   );
 }
